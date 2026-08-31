@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynasty Edge | Fantasy Football</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark">DE</div><div><strong>DYNASTY</strong><span>EDGE</span></div></div>
+    <div class="league-pill">12 TEAM • DYNASTY</div>
+    <nav>
+      <button class="nav-item active" data-page="dashboard">⌂ <span>Dashboard</span></button>
+      <button class="nav-item" data-page="team">◈ <span>My Team</span></button>
+      <button class="nav-item" data-page="players">◎ <span>Players</span></button>
+      <button class="nav-item" data-page="trade">⇄ <span>Trade Analyzer</span></button>
+      <button class="nav-item" data-page="draft">▦ <span>Draft Room</span></button>
+      <button class="nav-item" data-page="league">♟ <span>League</span></button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="mini-card"><span>Season</span><strong>2026</strong><small>Dynasty Mode</small></div>
+      <div class="profile"><div class="avatar">TT</div><div><strong>Tayden</strong><small>Manager</small></div></div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <button class="mobile-menu" id="mobileMenu">☰</button>
+      <div><p class="eyebrow">2026 SEASON</p><h1 id="pageTitle">Dynasty Dashboard</h1></div>
+      <div class="top-actions"><button class="icon-btn" id="themeBtn" title="Toggle theme">◐</button><button class="league-btn">Thomas Family League ▾</button></div>
+    </header>
+
+    <section id="dashboard" class="page active-page">
+      <div class="hero">
+        <div><p class="eyebrow">WELCOME BACK, TAYDEN</p><h2>Build for today.<br><span>Dominate tomorrow.</span></h2><p class="hero-copy">Your roster is built to contend. Keep your edge by managing value, depth and future draft capital.</p><button class="primary" data-goto="trade">Analyze a Trade <span>→</span></button></div>
+        <div class="hero-orb"><div class="orb-number">91</div><div>CONTENDER SCORE</div></div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card"><span>Power Ranking</span><strong>#2</strong><small class="up">↑ 1 this week</small></div>
+        <div class="stat-card"><span>Roster Value</span><strong>842</strong><small>+24 this week</small></div>
+        <div class="stat-card"><span>Draft Capital</span><strong>7.4</strong><small>Value index</small></div>
+        <div class="stat-card"><span>League Record</span><strong>0–0</strong><small>Week 1</small></div>
+      </div>
+
+      <div class="two-col">
+        <div class="panel">
+          <div class="panel-head"><div><p class="eyebrow">ROSTER HEALTH</p><h3>Position Grades</h3></div><button class="text-btn" data-goto="team">View roster →</button></div>
+          <div id="grades"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-head"><div><p class="eyebrow">MARKET</p><h3>Players to Watch</h3></div><button class="text-btn" data-goto="players">View all →</button></div>
+          <div id="watchlist"></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-head"><div><p class="eyebrow">RECENT ACTIVITY</p><h3>League Feed</h3></div></div>
+        <div class="feed">
+          <div><span class="feed-dot"></span><div><strong>Trade market is heating up</strong><p>Managers are prioritizing young RBs and future 1sts.</p></div><time>Today</time></div>
+          <div class="feed"><span class="feed-dot"></span><div><strong>Draft approaching</strong><p>Round 1 is loaded with young offensive talent.</p></div><time>1d</time></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="team" class="page">
+      <div class="page-intro"><div><p class="eyebrow">MY TEAM</p><h2>Thomas Dynasty</h2><p>Contender • 842 roster value</p></div><div class="grade-big">A−<small>TEAM GRADE</small></div></div>
+      <div class="team-grid">
+        <div class="panel roster-panel"><div class="panel-head"><h3>Starting Lineup</h3><span class="muted">Projected</span></div><div id="roster"></div></div>
+        <div class="panel"><div class="panel-head"><h3>Draft Capital</h3></div><div id="picks"></div><div class="needs"><p class="eyebrow">BIGGEST NEED</p><h3>RB Depth</h3><p>Add a young back with receiving upside.</p></div></div>
+      </div>
+    </section>
+
+    <section id="players" class="page">
+      <div class="page-intro"><div><p class="eyebrow">PLAYER DATABASE</p><h2>Dynasty Rankings</h2><p>Search and filter the market.</p></div></div>
+      <div class="panel">
+        <div class="filters"><input id="playerSearch" placeholder="Search player..."><select id="posFilter"><option value="ALL">All positions</option><option>QB</option><option>RB</option><option>WR</option><option>TE</option></select><select id="ageFilter"><option value="ALL">All ages</option><option value="YOUNG">25 & under</option><option value="PRIME">26–29</option><option value="VET">30+</option></select></div>
+        <div class="table-wrap"><table><thead><tr><th>#</th><th>Player</th><th>Pos</th><th>Age</th><th>Team</th><th>Dynasty Value</th><th>Trend</th></tr></thead><tbody id="playersTable"></tbody></table></div>
+      </div>
+    </section>
+
+    <section id="trade" class="page">
+      <div class="page-intro"><div><p class="eyebrow">TRADE LAB</p><h2>Trade Analyzer</h2><p>Compare dynasty value before you hit accept.</p></div></div>
+      <div class="trade-layout">
+        <div class="panel trade-side"><div class="panel-head"><h3>Your Side</h3><span id="yourValue" class="value-chip">0</span></div><div class="trade-list" id="yourTrade"></div><button class="add-btn" data-side="your">+ Add player</button></div>
+        <div class="trade-vs">VS</div>
+        <div class="panel trade-side"><div class="panel-head"><h3>Their Side</h3><span id="theirValue" class="value-chip">0</span></div><div class="trade-list" id="theirTrade"></div><button class="add-btn" data-side="their">+ Add player</button></div>
+      </div>
+      <div class="panel verdict" id="verdict"><p class="eyebrow">TRADE VERDICT</p><h2>Add assets to compare</h2><p>The analyzer weighs player value, age and positional context.</p></div>
+    </section>
+
+    <section id="draft" class="page">
+      <div class="page-intro"><div><p class="eyebrow">DRAFT ROOM</p><h2>2026 Rookie Draft</h2><p>Use rankings and team needs to make the next pick.</p></div><div class="round-pill">ROUND 1 • PICK 10</div></div>
+      <div class="draft-grid"><div class="panel"><div class="panel-head"><h3>Draft Board</h3><span class="muted">12 teams</span></div><div id="draftBoard"></div></div><div class="panel"><div class="panel-head"><h3>Best Available</h3></div><div id="available"></div></div></div>
+    </section>
+
+    <section id="league" class="page">
+      <div class="page-intro"><div><p class="eyebrow">YOUR LEAGUE</p><h2>Thomas Family League</h2><p>12 managers • Dynasty • 1 QB</p></div></div>
+      <div class="panel"><div class="panel-head"><h3>Power Rankings</h3><span class="muted">Preseason</span></div><div class="table-wrap"><table><thead><tr><th>#</th><th>Manager</th><th>Team</th><th>Grade</th><th>Roster Value</th><th>Outlook</th></tr></thead><tbody id="leagueTable"></tbody></table></div></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast"></div>
+  <script src="script.js"></script>
+</body>
+</html>
