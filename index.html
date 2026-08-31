@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a0d12">
+  <title>Dynasty Edge — Sleeper League</title>
+  <meta name="description" content="Live dynasty fantasy football dashboard powered by Sleeper league data.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">DE</div>
+      <div>
+        <div class="eyebrow">2026 SEASON</div>
+        <h1>Dynasty Edge</h1>
+      </div>
+    </div>
+    <button id="refreshBtn" class="icon-btn" title="Refresh league data">↻</button>
+  </header>
+
+  <main id="app" class="shell">
+    <section id="loading" class="panel loading">
+      <div class="spinner"></div>
+      <h2>Connecting to Sleeper…</h2>
+      <p id="loadingText">Loading league 1312156686517030912</p>
+    </section>
+
+    <section id="error" class="panel hidden">
+      <h2>Couldn't load the league</h2>
+      <p id="errorText"></p>
+      <button id="retryBtn" class="primary">Try again</button>
+    </section>
+
+    <div id="dashboard" class="hidden">
+      <section class="hero panel">
+        <div>
+          <div class="eyebrow">SLEEPER DYNASTY</div>
+          <h2 id="leagueName">League</h2>
+          <p id="leagueMeta">12 teams · Live league data</p>
+        </div>
+        <div class="hero-badge">
+          <span class="dot"></span>
+          LIVE
+        </div>
+      </section>
+
+      <section class="team-switcher panel">
+        <div><span class="eyebrow">VIEW AS</span><h3 id="myTeam">—</h3><small id="managerHandle" class="muted"></small></div>
+        <select id="teamSelect" aria-label="Choose your team"></select>
+      </section>
+
+      <nav class="tabs" aria-label="Dashboard sections">
+        <button class="tab active" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="weekly">Weekly</button>
+        <button class="tab" data-tab="teams">Teams</button>
+        <button class="tab" data-tab="picks">Draft Picks</button>
+        <button class="tab" data-tab="settings">Settings</button>
+      </nav>
+
+      <section id="overview" class="tab-panel">
+        <div class="grid stats">
+          <article class="stat panel">
+            <span>Record</span><strong id="myRecord">—</strong><small>regular season</small>
+          </article>
+          <article class="stat panel">
+            <span>Power Rank</span><strong id="myRank">—</strong><small>live roster score</small>
+          </article>
+          <article class="stat panel">
+            <span>Roster Value</span><strong id="myValue">—</strong><small>dynasty index</small>
+          </article>
+          <article class="stat panel">
+            <span>Draft Capital</span><strong id="myCapital">—</strong><small>future picks</small>
+          </article>
+        </div>
+
+        <div class="two-col">
+          <article class="panel">
+            <div class="section-head"><h3>League Power Rankings</h3><span class="muted">Roster + picks</span></div>
+            <div id="rankings"></div>
+          </article>
+          <article class="panel">
+            <div class="section-head"><h3>Your Team</h3><span class="muted">Live Sleeper roster</span></div>
+            <div id="myRoster"></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="section-head">
+            <h3>Dynasty Draft Assistant</h3>
+            <span class="muted">Based on your roster & picks</span>
+          </div>
+          <div id="draftAdvice" class="advice"></div>
+        </article>
+      </section>
+
+      <section id="weekly" class="tab-panel hidden">
+        <article class="panel">
+          <div class="section-head"><div><h3>Weekly Scoring & Matchups</h3><span id="weekLabel" class="muted">Week 1</span></div><select id="weekSelect" class="week-select" aria-label="Choose NFL week"><option value="1">Week 1</option><option value="2">Week 2</option><option value="3">Week 3</option><option value="4">Week 4</option><option value="5">Week 5</option><option value="6">Week 6</option><option value="7">Week 7</option><option value="8">Week 8</option><option value="9">Week 9</option><option value="10">Week 10</option><option value="11">Week 11</option><option value="12">Week 12</option><option value="13">Week 13</option><option value="14">Week 14</option><option value="15">Week 15</option><option value="16">Week 16</option><option value="17">Week 17</option><option value="18">Week 18</option></select></div>
+          <div id="matchupSummary"></div>
+          <div id="weeklyAwards" class="weekly-awards"></div>
+          <div id="matchupsList" class="matchups-list"></div>
+        </article>
+      </section>
+
+      <section id="teams" class="tab-panel hidden">
+        <article class="panel">
+          <div class="section-head"><h3>League Teams</h3><span id="teamCount" class="muted"></span></div>
+          <div id="teamsList" class="teams-grid"></div>
+        </article>
+      </section>
+
+      <section id="picks" class="tab-panel hidden">
+        <article class="panel">
+          <div class="section-head"><h3>Future Draft Capital</h3><span class="muted">Sleeper traded picks</span></div>
+          <div id="picksList"></div>
+        </article>
+      </section>
+
+      <section id="settings" class="tab-panel hidden">
+        <article class="panel">
+          <div class="section-head"><h3>League Settings</h3><span class="muted">From Sleeper</span></div>
+          <div id="settingsGrid" class="settings-grid"></div>
+        </article>
+        <article class="panel setup-panel">
+          <h3>Site Setup</h3>
+          <p>This public app is connected to Sleeper league <code>1312156686517030912</code>. Every manager can open the same link and choose their own team from the selector.</p>
+          <p>No Sleeper password or private token is stored in the site. The dashboard uses Sleeper's public read-only league endpoints.</p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <footer>Dynasty Edge · Live data via Sleeper's read-only API</footer>
+  <script src="app.js"></script>
+</body>
+</html>
