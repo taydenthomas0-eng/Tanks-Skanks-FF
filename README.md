@@ -1,28 +1,28 @@
-# Dynasty Edge 🏈
+# Dynasty Edge — Sleeper Connected
 
-A polished, responsive dynasty fantasy football dashboard built with plain HTML, CSS and JavaScript.
+This is a mobile-friendly GitHub Pages site that reads a Sleeper dynasty league directly from Sleeper's read-only API.
 
-## Features
-- Dashboard with contender score and roster grades
-- My Team roster and draft capital
-- Searchable dynasty player rankings
-- Trade analyzer with dynasty-value scoring
-- Rookie draft room
-- League power rankings
-- Dark/light mode
-- Mobile responsive layout
-- No framework or build step required
+## Your league
+- League ID: `1312156686517030912`
+- League: Tanks and Skanks
+- Teams: 12
+- Dynasty
+- Waivers: FAAB
+- FAAB budget: $1000
+- Trade deadline: Week 12
+- IR slots: 4
+- Taxi slots: 3
+- Taxi duration: 3 years
 
-## Run locally
-Open `index.html` in a browser.
-
-## Publish on GitHub Pages
-1. Create a GitHub repository.
-2. Upload `index.html`, `style.css`, `script.js`, and the `data` folder.
-3. Go to **Settings → Pages**.
-4. Under **Build and deployment**, choose **Deploy from a branch**.
-5. Select `main` and `/ (root)`, then Save.
-6. GitHub will provide your live site URL.
+## Upload to GitHub from iPhone
+1. Open your GitHub repository.
+2. Add/upload `index.html`, `style.css`, and `app.js`.
+3. Upload `README.md` too if you want the instructions kept in the repo.
+4. Commit to `main`.
+5. In **Settings → Pages**, use **Deploy from a branch → main → /(root)**.
+6. Open your GitHub Pages URL.
 
 ## Important
-The player/league information in this starter is demo data. It is structured so you can later replace it with real NFL/fantasy data from an API.
+The dashboard is configured for your league ID and the Sleeper username `CopsAndRodgers12`, which was highlighted in the screenshots you supplied.
+
+If Sleeper's browser CORS policy prevents a direct GitHub Pages request in a particular environment, the UI is ready for a tiny serverless proxy (Vercel/Cloudflare) without changing the dashboard.
