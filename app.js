@@ -52,7 +52,33 @@ function dashboard(){const top=state.rosters.slice().sort((a,b)=>pts(b)-pts(a))[
 <div class="section"><h2 class="section-title">LATEST 10 MOVES</h2>${transactionList(10)}</div>`}
 function weekly(){return `<div class="eyebrow">WEEKLY</div><h1 class="section-title">WEEK ${state.week} MATCHUPS</h1><div class="grid2">${matchupPairs().map(p=>`<div class="card"><div class="player-row"><strong>${name(rosterOwner(p[0]))}</strong><b>${Number(p[0].points||0).toFixed(2)}</b></div><div class="player-row"><strong>${name(rosterOwner(p[1]))}</strong><b>${Number(p[1].points||0).toFixed(2)}</b></div></div>`).join("")||`<div class="empty">This week's matchups are not available yet.</div>`}</div><div class="section"><h2 class="section-title">WEEKLY AWARDS</h2>${weeklyAwards()}</div>`}
 function rosterOwner(m){const r=state.rosters.find(r=>r.roster_id===m.roster_id);return r?.owner_id}
-function transactionList(n=10){const arr=state.transactions.slice(0,n);if(!arr.length)return `<div class="empty">No transactions returned by Sleeper yet.</div>`;return `<div class="card">${arr.map(t=>`<div class="player-row"><div><strong>${esc(t.type||"TRANSACTION").toUpperCase()}</strong><div class="muted">${(t.consenter_ids||[]).map(name).join(" ↔ ")||"League move"} ${t.status?"":" "}</div></div><span class="pill">${new Date(t.created||Date.now()).toLocaleDateString()}</span></div>`).join("")}</div>`}
+function transactionList(n=10){
+ const arr=state.transactions.slice(0,n);
+ if(!arr.length)return `<div class="empty">No transactions returned by Sleeper yet.</div>`;
+
+ return `<div class="card">${
+  arr.map(t=>{
+   const teams=(t.roster_ids||[])
+    .map(rid=>{
+     const r=state.rosters.find(x=>x.roster_id===rid);
+     return r?name(r.owner_id):null;
+    })
+    .filter(Boolean);
+
+   const teamNames=teams.length
+    ? teams.join(" ↔ ")
+    : (t.consenter_ids||[]).map(name).join(" ↔ ") || "League move";
+
+   return `<div class="player-row">
+    <div>
+     <strong>${esc(t.type||"TRANSACTION").toUpperCase()}</strong>
+     <div class="muted">${teamNames}</div>
+    </div>
+    <span class="pill">${new Date(t.created||Date.now()).toLocaleDateString()}</span>
+   </div>`;
+  }).join("")
+ }</div>`;
+}
 function transactions(){return `<div class="eyebrow">TRANSACTION WIRE</div><h1 class="section-title">LATEST 10 MOVES</h1>${transactionList(10)}<div class="section card"><h2>TRANSACTION CENTER</h2><p class="sub">All transaction history is pulled from Sleeper. Trades, waivers, adds, drops and commissioner moves update automatically.</p></div>`}
 function managers(){return `<div class="eyebrow">LEAGUE ROSTERS</div><h1 class="section-title">MANAGERS</h1><div class="grid3">${state.users.map(u=>{const r=rosterByOwner(u.user_id);return `<div class="card"><span class="pill">ROSTER ${r?.roster_id??""}</span><h3>${name(u.user_id)}</h3><div class="green">${managerRecord(r)}</div><div class="muted">${Number(r?.settings?.fpts||0).toFixed(2)} pts</div></div>`}).join("")}</div>`}
 function standings(){
