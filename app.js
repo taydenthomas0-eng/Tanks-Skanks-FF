@@ -1,7 +1,11 @@
 const LEAGUE_ID="1312156686517030912";
 const state={league:null,users:[],rosters:[],matchups:[],transactions:[],drafts:[],picks:[],tradedPicks:[],week:1,tab:"dashboard",playerMap:{},currentUser:null};
 
-async function api(path){const r=await fetch("/api/sleeper/"+path); if(!r.ok) throw Error(await r.text()); return r.json();}
+async function api(path){
+ const r=await fetch("https://api.sleeper.app/v1/"+path);
+ if(!r.ok) throw Error(await r.text());
+ return r.json();
+}
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
 const userById=id=>state.users.find(u=>u.user_id===id);
 const rosterByOwner=id=>state.rosters.find(r=>r.owner_id===id);
